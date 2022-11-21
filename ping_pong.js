@@ -12,8 +12,15 @@ function setup() {
 
 function draw() {
   background(0);
-  circle(xBolinha,yBolinha,tamanhoBolinha)
-  xBolinha += velocidadexBolinha
-  yBolinha += velocidadeyBolinha 
+  circle(xBolinha,yBolinha,tamanhoBolinha);
+  xBolinha += velocidadexBolinha;
+  yBolinha += velocidadeyBolinha;
   
+  if(xBolinha > width || xBolinha < 0){
+    velocidadexBolinha *= -1;
+  }
+  
+  if(yBolinha > height|| yBolinha < 0){
+    velocidadeyBolinha *= -1;
+  }
 }
