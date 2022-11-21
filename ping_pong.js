@@ -1,12 +1,22 @@
-
+//Esfera
 //Variáveis da esfera
 let xBolinha = 300;
 let yBolinha = 200;
 let diametro = 22;
 let raio = diametro /2;
 //Velocidade da esfera
-let velocidadexBolinha = 5
-let velocidadeyBolinha = 5
+let velocidadexBolinha = 5;
+let velocidadeyBolinha = 5;
+
+//Raquetes
+
+//Variáveis da raquete do aliado
+
+let xRaquete = 5;
+let yRaquete = 150;
+let bRaquete = 10;
+let hRaquete = 90;
+
 
 //Background
 function setup() {
@@ -19,6 +29,7 @@ function draw() {
   bolinha();
   movimentaBolinha();
   colisao();
+  raquete();
   
 //Função das coordenadas da esfera
 function bolinha(){
@@ -32,6 +43,7 @@ function movimentaBolinha(){
 }
 //Verificação de colisão com a borda
 function colisao(){
+  
   //Eixo X
    if(xBolinha + raio > width || xBolinha - raio < 0){
     velocidadexBolinha *= -1;
@@ -41,4 +53,8 @@ function colisao(){
     velocidadeyBolinha *= -1;
   }
 }
+  
+  function raquete (){
+    rect(xRaquete, yRaquete, bRaquete, hRaquete)
+  }
 }
