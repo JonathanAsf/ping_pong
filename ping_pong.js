@@ -29,7 +29,9 @@ function draw() {
   bolinha();
   movimentaBolinha();
   colisao();
+  raqueteColisao()
   raquete();
+  movimentoRaquete();
   
 //Função das coordenadas da esfera
 function bolinha(){
@@ -58,3 +60,20 @@ function colisao(){
     rect(xRaquete, yRaquete, bRaquete, hRaquete)
   }
 }
+
+function raqueteColisao(){
+  if(xBolinha - raio < xRaquete + bRaquete && yBolinha - raio < yRaquete + hRaquete && yBolinha + raio > yRaquete){
+   velocidadexBolinha *= -1;
+  }
+  
+}
+
+  function movimentoRaquete (){
+    if (keyIsDown(UP_ARROW)){
+      yRaquete -= 10;
+    }
+     if (keyIsDown(DOWN_ARROW)){
+      yRaquete += 10;
+    }
+  }
+  
