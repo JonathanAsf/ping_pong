@@ -14,7 +14,7 @@ let velocidadeyBolinha = 5;
 
 let xRaqueteOponente = 585
 let yRaqueteOponente = 150;
-
+let velocidadeYOponente;
 
 //Variáveis da raquete do aliado
 
@@ -36,52 +36,61 @@ function draw() {
   movimentaBolinha();
   colisao();
   raquete(xRaquete, yRaquete);
-  raquete(xRaqueteOponente, yRaqueteOponente); //Raquete do oponente
-  raqueteColisao();
+  raquete(xRaqueteOponente, yRaqueteOponente);
+  raqueteColisao(xRaquete,yRaquete);
+  raqueteColisao(xRaqueteOponente,yRaqueteOponente);
+  
   movimentoRaquete();
+  movimentoRaqueteOponente();
 }
 
 //Função das coordenadas da esfera
 function bolinha(){
-   circle(xBolinha,yBolinha,diametro);
+  circle(xBolinha,yBolinha,diametro);
 }
   
 //Funções do movimento da esfera
 function movimentaBolinha(){
-    xBolinha += velocidadexBolinha;
-    yBolinha += velocidadeyBolinha;
+  xBolinha += velocidadexBolinha;
+  yBolinha += velocidadeyBolinha;
 }
 //Verificação de colisão com a borda
 function colisao(){
- 
-  //Eixo X
-   if(xBolinha + raio > width || xBolinha - raio < 0){
+  
+//Eixo X
+  if(xBolinha + raio > width || xBolinha - raio < 0){
     velocidadexBolinha *= -1;
   }
-  //Eixo Y
+//Eixo Y
   if(yBolinha + raio> height|| yBolinha - raio < 0){
     velocidadeyBolinha *= -1;
   }
-  
 }
   
-  //Definição das raquetes
-  function raquete (x,y){
-    rect(x,y, bRaquete, hRaquete)
+function raquete (x,y){
+  rect(x,y, bRaquete, hRaquete)
   }
 
-function raqueteColisao(){
-  if(xBolinha - raio < xRaquete + bRaquete && yBolinha - raio < yRaquete + hRaquete && yBolinha + raio > yRaquete){
-   velocidadexBolinha *= -1;
+
+
+function raqueteColisao(x,y){
+  colidiu = collideRectCircle(x,y,bRaquete,hRaquete,xBolinha,yBolinha,raio);
+  if (colidiu){
+    velocidadexBolinha *= -1;
   }
+  
 }
 
-  function movimentoRaquete (){
-    if (keyIsDown(UP_ARROW)){
+function movimentoRaquete (){
+  if (keyIsDown(UP_ARROW)){
       yRaquete -= 10;
     }
-     if (keyIsDown(DOWN_ARROW)){
+  if (keyIsDown(DOWN_ARROW)){
       yRaquete += 10;
     }
   }
+function movimentoRaqueteOponente(){
+  velocidadeYOponente = yBolinha - yRaqueteOponente - ((hRaquete/2) -30) 
+  yRaqueteOponente += velocidadeYOponente
+}
   
