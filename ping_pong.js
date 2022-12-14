@@ -10,6 +10,12 @@ let velocidadeyBolinha = 5;
 
 //Raquetes
 
+//Variáveis da raquete do oponente
+
+let xRaqueteOponente = 585
+let yRaqueteOponente = 150;
+
+
 //Variáveis da raquete do aliado
 
 let xRaquete = 5;
@@ -17,7 +23,7 @@ let yRaquete = 150;
 let bRaquete = 10;
 let hRaquete = 90;
 
-let colidiu = false;
+
 //Background
 function setup() {
   createCanvas(600, 400);
@@ -29,10 +35,12 @@ function draw() {
   bolinha();
   movimentaBolinha();
   colisao();
-  raquete();
+  raquete(xRaquete, yRaquete);
+  raquete(xRaqueteOponente, yRaqueteOponente); //Raquete do oponente
+  raqueteColisao();
   movimentoRaquete();
-  bibliotecaColisao();
-  
+}
+
 //Função das coordenadas da esfera
 function bolinha(){
    circle(xBolinha,yBolinha,diametro);
@@ -45,7 +53,7 @@ function movimentaBolinha(){
 }
 //Verificação de colisão com a borda
 function colisao(){
-  
+ 
   //Eixo X
    if(xBolinha + raio > width || xBolinha - raio < 0){
     velocidadexBolinha *= -1;
@@ -54,27 +62,26 @@ function colisao(){
   if(yBolinha + raio> height|| yBolinha - raio < 0){
     velocidadeyBolinha *= -1;
   }
+  
 }
   
-  function raquete (){
-    rect(xRaquete, yRaquete, bRaquete, hRaquete)
+  //Definição das raquetes
+  function raquete (x,y){
+    rect(x,y, bRaquete, hRaquete)
   }
 
+function raqueteColisao(){
+  if(xBolinha - raio < xRaquete + bRaquete && yBolinha - raio < yRaquete + hRaquete && yBolinha + raio > yRaquete){
+   velocidadexBolinha *= -1;
+  }
 }
 
   function movimentoRaquete (){
     if (keyIsDown(UP_ARROW)){
       yRaquete -= 10;
     }
-    if (keyIsDown(DOWN_ARROW)){
+     if (keyIsDown(DOWN_ARROW)){
       yRaquete += 10;
     }
   }
   
-  function bibliotecaColisao(){
-    colidiu =
-    collideRectCircle(xRaquete,yRaquete,bRaquete,hRaquete,xBolinha,yBolinha,raio);
-    if(colidiu){
-       velocidadexBolinha *= -1
-    }
-  }
