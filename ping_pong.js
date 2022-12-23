@@ -1,8 +1,10 @@
+//Não está registrando pontuação
+
 //Esfera
 //Variáveis da esfera
 let xBolinha = 300;
 let yBolinha = 200;
-let diametro = 22;
+let diametro = 15;
 let raio = diametro /2;
 //Velocidade da esfera
 let velocidadexBolinha = 5;
@@ -23,6 +25,12 @@ let yRaquete = 150;
 let bRaquete = 10;
 let hRaquete = 90;
 
+//Colisao
+let colidiu = false
+
+//Placar
+let pontos = 0;
+let pontosOponente = 0;
 
 //Background
 function setup() {
@@ -32,6 +40,8 @@ function setup() {
 //Função principal
 function draw() {
   background(0);
+  placar();
+  ponto();
   bolinha();
   movimentaBolinha();
   colisao();
@@ -39,9 +49,9 @@ function draw() {
   raquete(xRaqueteOponente, yRaqueteOponente);
   raqueteColisao(xRaquete,yRaquete);
   raqueteColisao(xRaqueteOponente,yRaqueteOponente);
-  
   movimentoRaquete();
-  movimentoRaqueteOponente();
+  //movimentoRaqueteOponente();
+  
 }
 
 //Função das coordenadas da esfera
@@ -93,4 +103,18 @@ function movimentoRaqueteOponente(){
   velocidadeYOponente = yBolinha - yRaqueteOponente - ((hRaquete/2) -30) 
   yRaqueteOponente += velocidadeYOponente
 }
+
+function placar(){
+  fill(255);
+  text(pontos, 278,26);
+  text(pontosOponente, 321,26);
+}
   
+function ponto(){
+  if (xBolinha > 590){
+    pontos += 1;
+  }
+  if (xBolinha < 10){
+    pontosOponente += 1;
+  }
+}
