@@ -81,14 +81,11 @@ function raquete (x,y){
   rect(x,y, bRaquete, hRaquete)
   }
 
-
-
 function raqueteColisao(x,y){
   colidiu = collideRectCircle(x,y,bRaquete,hRaquete,xBolinha,yBolinha,raio);
   if (colidiu){
     velocidadexBolinha *= -1;
   }
-  
 }
 
 function movimentoRaquete (){
@@ -105,9 +102,16 @@ function movimentoRaqueteOponente(){
 }
 
 function placar(){
+  textAlign(CENTER);
+  textSize(16);
+  fill(color(255,140,0));
+  rect(150,10,40,20);
   fill(255);
-  text(pontos, 278,26);
-  text(pontosOponente, 321,26);
+  text(pontos, 170,26);
+  fill(color(255,140,0));
+  rect(450,10,40,20);
+  fill(255);
+  text(pontosOponente, 470,26);
 }
   
 function ponto(){
